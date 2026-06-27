@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jalla Jagannadharao - AI & ML Engineer specializing in Generative AI, Computer Vision, and Deep Learning.">
+    <meta name="keywords" content="AI, Machine Learning, Python, Generative AI, RAG, Computer Vision, Jalla Jagannadharao">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jagannadharao8.github.io/">
+    <meta property="og:title" content="Jalla Jagannadharao | AI & ML Engineer">
+    <meta property="og:description" content="AI & ML Engineer specializing in Generative AI, Computer Vision, and Deep Learning.">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jagannadharao8.github.io/">
+    <meta property="twitter:title" content="Jalla Jagannadharao | AI & ML Engineer">
+    <meta property="twitter:description" content="AI & ML Engineer specializing in Generative AI, Computer Vision, and Deep Learning.">
+    
+    <title>Jalla Jagannadharao | AI & ML Engineer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Cinematic Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="loader-content">
+            <i class="fa-solid fa-network-wired glowing-brain"></i>
+            <h2 class="neon-text">Initializing Portfolio...</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="cursor-trail" id="cursor-trail"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Film Grain Overlay -->
+    <div class="film-grain"></div>
+
+    <!-- Background Animated Gradient Mesh -->
+    <div class="gradient-mesh">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">JJ<span class="neon-dot">.</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- 3D Particle Canvas -->
+        <canvas id="particle-canvas"></canvas>
+        
+        <!-- Spotlight -->
+        <div class="spotlight" id="spotlight"></div>
+
+        <div class="hero-content reveal-on-scroll">
+            <p class="greeting">Hello, I am</p>
+            <h1 class="animated-gradient-text main-title">Jalla Jagannadharao</h1>
+            
+            <div class="terminal-container">
+                <span class="prompt">>_ </span>
+                <span id="typewriter-text" class="typewriter"></span><span class="cursor">|</span>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary magnetic-btn ripple">View My Work</a>
+                <a href="https://github.com/jagannadharao8" target="_blank" class="btn btn-outline magnetic-btn ripple"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+        </div>
+        
+        <a href="#about" class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Marquee Text Band 1 -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>MACHINE LEARNING • GENERATIVE AI • DEEP LEARNING • RAG • COMPUTER VISION • NLP • EXPLAINABLE AI • </span>
+            <span>MACHINE LEARNING • GENERATIVE AI • DEEP LEARNING • RAG • COMPUTER VISION • NLP • EXPLAINABLE AI • </span>
+        </div>
+    </div>
+
+    <!-- About Section (Bento Grid) -->
+    <section id="about" class="about-section padding-section">
+        <h2 class="section-title reveal-on-scroll">About <span class="neon-text">Me</span></h2>
+        
+        <div class="bento-container reveal-on-scroll">
+            <div class="bento-item bento-bio glass-card">
+                <h3>Bio</h3>
+                <p>I am a passionate <span class="neon-highlight">AI & ML Engineer</span> based in Visakhapatnam, India. My core focus lies in architecting end-to-end Machine Learning pipelines, integrating <span class="neon-highlight">Retrieval-Augmented Generation (RAG)</span>, and developing intelligent systems powered by state-of-the-art Generative AI. I believe in writing scalable code and solving real-world problems through data.</p>
+            </div>
+            <div class="bento-item bento-profile glass-card tilt-card">
+                <div class="profile-img-container">
+                    <img src="https://avatars.githubusercontent.com/u/164717947?v=4" alt="Jalla Jagannadharao" class="profile-img">
+                    <div class="neon-ring"></div>
+                </div>
+            </div>
+            <div class="bento-item bento-edu glass-card">
+                <i class="fa-solid fa-graduation-cap bento-icon"></i>
+                <h4>Education</h4>
+                <p>B.Tech Computer Science (AI & ML)<br>@ Raghu Engineering College</p>
+            </div>
+            <div class="bento-item bento-loc glass-card">
+                <i class="fa-solid fa-location-dot bento-icon"></i>
+                <h4>Location</h4>
+                <p>Visakhapatnam, India</p>
+            </div>
+            <div class="bento-item bento-focus glass-card">
+                <i class="fa-solid fa-microscope bento-icon"></i>
+                <h4>Focus</h4>
+                <p>Multimodal AI & Scalable Deployments</p>
+            </div>
+        </div>
+
+        <!-- Animated Stats -->
+        <div class="stats-container reveal-on-scroll">
+            <div class="stat-box">
+                <h3 class="counter" data-target="3">0</h3><span>+</span>
+                <p>Projects Built</p>
+            </div>
+            <div class="stat-box">
+                <h3 class="counter" data-target="3">0</h3>
+                <p>Industry Internships</p>
+            </div>
+            <div class="stat-box">
+                <h3 class="counter" data-target="87">0</h3><span>%</span>
+                <p>Model Accuracy</p>
+            </div>
+            <div class="stat-box">
+                <h3 class="counter" data-target="4">0</h3>
+                <p>Certifications</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cinematic Title -->
+    <div class="cinematic-title-container parallax-bg">
+        <h2 class="cinematic-title reveal-on-scroll">EXPERIENCE</h2>
+    </div>
+
+    <!-- Experience Section (Timeline) -->
+    <section id="experience" class="experience-section padding-section">
+        <div class="timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item left reveal-on-scroll">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-card">
+                    <h3>AI-ML Virtual Intern</h3>
+                    <h4>Edunet Foundation (IBM SkillsBuild)</h4>
+                    <p>Developed predictive models using IBM Watson tools, Python, and Scikit-learn, achieving over 87% model accuracy on the final AI project.</p>
+                    <div class="tech-badges">
+                        <span>Python</span><span>Scikit-Learn</span><span>IBM Watson</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item right reveal-on-scroll">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-card">
+                    <h3>Machine Learning Intern</h3>
+                    <h4>Talent Lad</h4>
+                    <p>Engineered features and optimized predictive models using cross-validation and hyperparameter tuning, significantly improving AUC and F1-score metrics.</p>
+                    <div class="tech-badges">
+                        <span>Machine Learning</span><span>Hyperparameter Tuning</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item left reveal-on-scroll">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-card">
+                    <h3>AI-ML Virtual Intern</h3>
+                    <h4>Google Developers (Eduskills)</h4>
+                    <p>Built and optimized deep learning workflows with TensorFlow, boosting model architecture accuracy by ~15%.</p>
+                    <div class="tech-badges">
+                        <span>TensorFlow</span><span>Deep Learning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cinematic Title -->
+    <div class="cinematic-title-container parallax-bg">
+        <h2 class="cinematic-title reveal-on-scroll">PROJECTS</h2>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section padding-section">
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card glass-card tilt-card reveal-on-scroll">
+                <div class="card-gradient-border"></div>
+                <h3>Multimodal Fake News Detection</h3>
+                <p>A GenAI-based system leveraging Vision-Language Models, RAG, and Explainable AI (XAI) to detect inconsistencies between visual media and accompanying claims.</p>
+                <div class="tech-badges">
+                    <span>Python</span><span>RoBERTa</span><span>Gemini</span><span>FastAPI</span><span>Docker</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://github.com/jagannadharao8/Fake-news-detection-using-GENAI-ML-DL-XAI" target="_blank" class="btn btn-sm btn-outline magnetic-btn"><i class="fa-brands fa-github"></i> Repository</a>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card glass-card tilt-card reveal-on-scroll" style="transition-delay: 100ms;">
+                <div class="card-gradient-border"></div>
+                <h3>Autonomous AI Research Agent</h3>
+                <p>An intelligent, RAG-powered research assistant for automated information synthesis, hallucination detection, and real-time citation tracking.</p>
+                <div class="tech-badges">
+                    <span>Python</span><span>Groq LLM</span><span>FAISS</span><span>Streamlit</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://github.com/jagannadharao8/ai-research-agent" target="_blank" class="btn btn-sm btn-outline magnetic-btn"><i class="fa-brands fa-github"></i> Repository</a>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card glass-card tilt-card reveal-on-scroll" style="transition-delay: 200ms;">
+                <div class="card-gradient-border"></div>
+                <h3>Employee Salary Prediction</h3>
+                <p>A robust Machine Learning classification model utilizing Random Forests to predict income levels based on demographic and occupational features with 85%+ accuracy.</p>
+                <div class="tech-badges">
+                    <span>Python</span><span>Scikit-Learn</span><span>Pandas</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://github.com/jagannadharao8/Employee-Salary-Prediction" target="_blank" class="btn btn-sm btn-outline magnetic-btn"><i class="fa-brands fa-github"></i> Repository</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cinematic Title -->
+    <div class="cinematic-title-container parallax-bg">
+        <h2 class="cinematic-title reveal-on-scroll">SKILLS</h2>
+    </div>
+
+    <!-- Skills Section (Hexagonal Bento Grid) -->
+    <section id="skills" class="skills-section padding-section">
+        <div class="skills-bento-grid reveal-on-scroll">
+            
+            <div class="skill-category glass-card">
+                <h3>Languages</h3>
+                <div class="hex-grid">
+                    <div class="hex-item" title="Python"><i class="fa-brands fa-python"></i></div>
+                    <div class="hex-item" title="Java"><i class="fa-brands fa-java"></i></div>
+                    <div class="hex-item" title="C"><span class="txt-icon">C</span></div>
+                    <div class="hex-item" title="SQL"><i class="fa-solid fa-database"></i></div>
+                </div>
+            </div>
+            
+            <div class="skill-category glass-card">
+                <h3>Machine Learning</h3>
+                <div class="hex-grid">
+                    <div class="hex-item" title="TensorFlow"><span class="txt-icon">TF</span></div>
+                    <div class="hex-item" title="Scikit-Learn"><span class="txt-icon">SKL</span></div>
+                    <div class="hex-item" title="Pandas"><span class="txt-icon">PD</span></div>
+                    <div class="hex-item" title="NumPy"><span class="txt-icon">NP</span></div>
+                </div>
+            </div>
+
+            <div class="skill-category glass-card">
+                <h3>AI Domains</h3>
+                <div class="hex-grid">
+                    <div class="hex-item" title="GenAI"><i class="fa-solid fa-brain"></i></div>
+                    <div class="hex-item" title="NLP"><i class="fa-solid fa-language"></i></div>
+                    <div class="hex-item" title="Computer Vision"><i class="fa-solid fa-eye"></i></div>
+                    <div class="hex-item" title="RAG"><i class="fa-solid fa-network-wired"></i></div>
+                </div>
+            </div>
+
+            <div class="skill-category glass-card">
+                <h3>Tools & MLOps</h3>
+                <div class="hex-grid">
+                    <div class="hex-item" title="Docker"><i class="fa-brands fa-docker"></i></div>
+                    <div class="hex-item" title="Git"><i class="fa-brands fa-git-alt"></i></div>
+                    <div class="hex-item" title="FastAPI"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="hex-item" title="Hugging Face"><span class="txt-icon">HF</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Marquee Text Band 2 -->
+    <div class="marquee-container reverse">
+        <div class="marquee-content">
+            <span>TENSORFLOW • PYTHON • DOCKER • FASTAPI • STREAMLIT • HUGGING FACE • FAISS • </span>
+            <span>TENSORFLOW • PYTHON • DOCKER • FASTAPI • STREAMLIT • HUGGING FACE • FAISS • </span>
+        </div>
+    </div>
+
+    <!-- Certifications (Auto Scroll Carousel) -->
+    <section id="certifications" class="certs-section padding-section">
+        <h2 class="section-title reveal-on-scroll">Certifications</h2>
+        <div class="carousel-container reveal-on-scroll">
+            <div class="carousel-track">
+                <div class="cert-card glass-card"><i class="fa-solid fa-certificate"></i><p>Generative AI Mastermind<br><span>Outskill</span></p></div>
+                <div class="cert-card glass-card"><i class="fa-solid fa-certificate"></i><p>Artificial Intelligence<br><span>IBM SkillsBuild</span></p></div>
+                <div class="cert-card glass-card"><i class="fa-solid fa-certificate"></i><p>Machine Learning using Python<br><span>IBM / edX</span></p></div>
+                <div class="cert-card glass-card"><i class="fa-solid fa-certificate"></i><p>Python Programming<br><span>HackerRank</span></p></div>
+                <!-- Duplicates for infinite scroll -->
+                <div class="cert-card glass-card" aria-hidden="true"><i class="fa-solid fa-certificate"></i><p>Generative AI Mastermind<br><span>Outskill</span></p></div>
+                <div class="cert-card glass-card" aria-hidden="true"><i class="fa-solid fa-certificate"></i><p>Artificial Intelligence<br><span>IBM SkillsBuild</span></p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section padding-section parallax-bg">
+        <h2 class="animated-gradient-text reveal-on-scroll">Let's Build Something Amazing Together</h2>
+        <div class="social-links reveal-on-scroll">
+            <a href="https://linkedin.com/in/jallajagannadharao" target="_blank" class="social-btn magnetic-btn ripple"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/jagannadharao8" target="_blank" class="social-btn magnetic-btn ripple"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:jallajagannadharao@gmail.com" class="social-btn magnetic-btn ripple"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top-line"></div>
+        <div class="footer-content">
+            <p>Designed & Built by <span class="neon-text">Jalla Jagannadharao</span> &copy; 2026</p>
+            <button id="back-to-top" class="back-to-top magnetic-btn"><i class="fa-solid fa-arrow-up"></i></button>
+        </div>
+    </footer>
+
+    <!-- Interactive Terminal Easter Egg -->
+    <button id="terminal-toggle" class="terminal-toggle magnetic-btn">>_</button>
+    <div id="terminal-overlay" class="terminal-overlay hidden">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close" id="term-close"></span>
+                    <span class="minimize"></span>
+                    <span class="maximize"></span>
+                </div>
+                <div class="terminal-title">guest@jagannadharao:~</div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <div>Welcome to JOS (Jagannadharao OS) v1.0</div>
+                <div>Type <span class="neon-text">'help'</span> to see available commands.</div>
+                <div class="terminal-input-line">
+                    <span class="prompt">guest@jagannadharao:~$ </span>
+                    <input type="text" id="terminal-input" autocomplete="off" autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
