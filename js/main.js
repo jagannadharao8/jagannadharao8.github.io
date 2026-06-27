@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const commands = {
-        'help': 'Available commands: about, skills, projects, contact, clear, sudo hire jagannadharao',
+        'help': 'Available commands: about, skills, projects, contact, clear, matrix, analyze, sudo hire jagannadharao',
         'about': 'Jalla Jagannadharao - AI & ML Engineer based in Visakhapatnam, India. Passionate about RAG, GenAI, and Multimodal systems.',
         'skills': 'Python, SQL, Java, TensorFlow, Scikit-Learn, Docker, FastAPI, RAG, GenAI, HuggingFace',
         'projects': '1. Multimodal Fake News Detection\n2. Autonomous AI Research Agent\n3. Employee Salary Prediction',
@@ -425,24 +425,97 @@ document.addEventListener('DOMContentLoaded', () => {
                 nodesToRemove.forEach(node => node.remove());
             } else if (cmd === '') {
                 // Do nothing
+            } else if (cmd === 'matrix') {
+                startMatrixEffect();
+                typeTerminalResponse("Initiating Matrix protocol... Follow the white rabbit.", '#00ff99', this.parentElement);
+            } else if (cmd === 'analyze') {
+                typeTerminalResponse("Initializing Neural Network...\nLoading pre-trained weights...\nAnalyzing visitor data...\n[██████████] 100%\n\nPrediction: You are highly likely to hire Jalla Jagannadharao.\nConfidence Score: 99.9%", '#00ff99', this.parentElement);
+            } else if (cmd === 'sudo rm -rf /') {
+                document.body.style.animation = "shake 0.5s infinite";
+                setTimeout(() => document.body.style.animation = "", 500);
+                typeTerminalResponse("CRITICAL ERROR: ACCESS DENIED.\nSecurity protocol initiated. This incident will be reported.", '#ff5f56', this.parentElement);
             } else {
-                const responseDiv = document.createElement('div');
-                if (commands[cmd]) {
-                    responseDiv.innerText = commands[cmd];
-                    responseDiv.style.color = '#00ff99';
-                } else {
-                    responseDiv.innerText = `Command not found: ${cmd}. Type 'help' for available commands.`;
-                    responseDiv.style.color = '#ff5f56';
+                let response = commands[cmd];
+                let color = '#00ff99';
+                if (!response) {
+                    response = `Command not found: ${cmd}. Type 'help' for available commands.`;
+                    color = '#ff5f56';
                 }
-                responseDiv.style.marginBottom = '10px';
-                responseDiv.style.whiteSpace = 'pre-wrap';
-                termBody.insertBefore(responseDiv, this.parentElement);
+                typeTerminalResponse(response, color, this.parentElement);
             }
             
             // Auto scroll to bottom
             termBody.scrollTop = termBody.scrollHeight;
         }
     });
+
+    // Helper for terminal typing effect
+    function typeTerminalResponse(text, color, inputElement) {
+        const responseDiv = document.createElement('div');
+        responseDiv.style.color = color;
+        responseDiv.style.marginBottom = '10px';
+        responseDiv.style.whiteSpace = 'pre-wrap';
+        termBody.insertBefore(responseDiv, inputElement);
+        
+        let i = 0;
+        termInput.disabled = true; // disable input while typing
+        
+        function typeChar() {
+            if (i < text.length) {
+                responseDiv.innerHTML += text.charAt(i);
+                i++;
+                termBody.scrollTop = termBody.scrollHeight;
+                setTimeout(typeChar, 15); // typing speed
+            } else {
+                termInput.disabled = false;
+                termInput.focus();
+            }
+        }
+        typeChar();
+    }
+
+    // Matrix Effect logic
+    function startMatrixEffect() {
+        if (document.getElementById('matrix-canvas')) return;
+        const mCanvas = document.createElement('canvas');
+        mCanvas.id = 'matrix-canvas';
+        mCanvas.style.position = 'fixed';
+        mCanvas.style.top = '0';
+        mCanvas.style.left = '0';
+        mCanvas.style.width = '100vw';
+        mCanvas.style.height = '100vh';
+        mCanvas.style.zIndex = '1';
+        mCanvas.style.pointerEvents = 'none';
+        mCanvas.style.opacity = '0.3';
+        document.body.appendChild(mCanvas);
+
+        const mCtx = mCanvas.getContext('2d');
+        mCanvas.width = window.innerWidth;
+        mCanvas.height = window.innerHeight;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
+        const fontSize = 16;
+        const columns = mCanvas.width / fontSize;
+        const drops = Array.from({length: columns}).fill(1);
+
+        function drawMatrix() {
+            mCtx.fillStyle = 'rgba(5, 5, 8, 0.05)';
+            mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+            mCtx.fillStyle = '#0F0';
+            mCtx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > mCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            requestAnimationFrame(drawMatrix);
+        }
+        drawMatrix();
+    }
 
     // Keyboard shortcut for terminal (Backtick `)
     document.addEventListener('keydown', (e) => {
