@@ -603,30 +603,30 @@ ul {
 }
 .txt-icon { font-size: 1.2rem; font-weight: 800; font-family: var(--font-mono); }
 
-/* Tooltip */
-.tooltip { position: relative; }
-.tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 110%; left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: var(--bg-color);
-    border: 1px solid var(--accent-primary);
-    color: var(--text-primary);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-family: var(--font-mono);
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
+/* Skill Labels */
+.skill-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
     transition: var(--transition);
-    z-index: 100;
-    box-shadow: 0 0 10px rgba(0, 255, 153, 0.2);
 }
-.tooltip:hover::after {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+.skill-name {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    text-align: center;
+    transition: var(--transition);
+}
+.skill-wrapper:hover .hex-item {
+    background: rgba(0,255,153,0.1);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateY(-5px);
+}
+.skill-wrapper:hover .skill-name {
+    color: var(--accent-primary);
+    text-shadow: 0 0 8px rgba(0,255,153,0.4);
 }
 
 /* ==========================================================================
