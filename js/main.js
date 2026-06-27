@@ -377,13 +377,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const termBody = document.getElementById('terminal-body');
     
     // Toggle terminal
-    terminalToggle.addEventListener('click', () => {
-        terminalOverlay.classList.remove('hidden');
-        termInput.focus();
+    terminalToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        terminalOverlay.classList.toggle('hidden');
+        if (!terminalOverlay.classList.contains('hidden')) {
+            termInput.focus();
+        }
     });
     
+    // Close when clicking the red dot
     termClose.addEventListener('click', () => {
         terminalOverlay.classList.add('hidden');
+    });
+
+    // Close when clicking anywhere outside the terminal
+    document.addEventListener('click', (e) => {
+        if (!terminalOverlay.classList.contains('hidden') && !terminalOverlay.contains(e.target) && e.target !== terminalToggle) {
+            terminalOverlay.classList.add('hidden');
+        }
     });
 
     const commands = {
