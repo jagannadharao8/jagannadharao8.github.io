@@ -5,6 +5,8 @@
 [![Live Website](https://img.shields.io/badge/Live_Website-jagannadharao8.github.io-blue?style=for-the-badge&logo=github)](https://jagannadharao8.github.io)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/jallajagannadharao)
 
+**🌐 Live Website:** [https://jagannadharao8.github.io](https://jagannadharao8.github.io)
+
 **A professional portfolio showcasing scalable machine learning pipelines, Generative AI applications, and algorithmic engineering.**
 
 </div>
