@@ -14,17 +14,16 @@
             margin: 0;
             padding: 20px;
             color: #000;
-            line-height: 1.2;
+            line-height: 1.4;
         }
         .page {
             width: 21cm;
-            height: 29.7cm;
-            padding: 1cm 1.5cm;
+            min-height: 29.7cm;
+            padding: 1.5cm 2cm;
             margin: 0 auto;
             background: white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             box-sizing: border-box;
-            overflow: hidden;
         }
         
         /* Print settings */
@@ -33,53 +32,39 @@
             margin: 0;
         }
         @media print {
-            html, body {
-                width: 21cm;
-                height: 29.7cm;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-            }
-            .page { 
-                width: 21cm; 
-                height: 29.7cm; 
-                padding: 1cm 1.5cm; 
-                margin: 0; 
-                box-shadow: none; 
-                border: none; 
-                overflow: hidden; 
-            }
+            body { background: none; padding: 0; }
+            .page { width: 21cm; height: auto; padding: 1.5cm 2cm; margin: 0; box-shadow: none; border: none; }
             .no-print { display: none !important; }
         }
 
         /* Typography */
-        h1 { font-size: 19pt; text-align: center; margin: 0 0 2px 0; text-transform: uppercase; letter-spacing: 1px; }
-        .contact-info { text-align: center; font-size: 9.5pt; margin-bottom: 8px; }
+        h1 { font-size: 22pt; text-align: center; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px; }
+        .contact-info { text-align: center; font-size: 10.5pt; margin-bottom: 16px; }
         .contact-info a { color: #000; text-decoration: none; }
         
         h2 { 
-            font-size: 11pt; 
+            font-size: 12pt; 
             text-transform: uppercase; 
             border-bottom: 1px solid #000; 
-            margin: 8px 0 4px 0; 
-            padding-bottom: 1px;
+            margin: 16px 0 8px 0; 
+            padding-bottom: 4px;
             letter-spacing: 0.5px;
         }
         
-        h3 { font-size: 9.5pt; margin: 0; display: flex; justify-content: space-between; font-weight: bold; }
-        h4 { font-size: 9.5pt; margin: 0 0 2px 0; display: flex; justify-content: space-between; font-weight: normal; font-style: italic; }
+        h3 { font-size: 10.5pt; margin: 0; display: flex; justify-content: space-between; font-weight: bold; }
+        h4 { font-size: 10.5pt; margin: 2px 0 6px 0; display: flex; justify-content: space-between; font-weight: normal; font-style: italic; }
         
-        p { font-size: 9.5pt; margin: 0 0 4px 0; text-align: justify; }
+        p { font-size: 10.5pt; margin: 0 0 8px 0; text-align: justify; }
         
-        ul { margin: 0 0 4px 0; padding-left: 20px; }
-        li { font-size: 9.5pt; margin-bottom: 2px; text-align: justify; }
+        ul { margin: 0 0 8px 0; padding-left: 20px; }
+        li { font-size: 10.5pt; margin-bottom: 4px; text-align: justify; }
 
-        .skills-grid { display: grid; grid-template-columns: 140px 1fr; gap: 2px; margin-bottom: 4px; }
-        .skills-grid strong { font-size: 9.5pt; }
-        .skills-grid span { font-size: 9.5pt; }
+        .skills-grid { display: grid; grid-template-columns: 140px 1fr; gap: 8px; margin-bottom: 12px; }
+        .skills-grid strong { font-size: 10.5pt; }
+        .skills-grid span { font-size: 10.5pt; }
 
-        .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 4px; }
-        .cert-grid li { margin-bottom: 1px; font-size: 9.5pt; }
+        .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .cert-grid li { margin-bottom: 2px; font-size: 10.5pt; }
 
         .print-btn {
             display: block; width: 21cm; margin: 0 auto 20px auto; 
