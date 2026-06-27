@@ -159,17 +159,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
+
+        // Parallax effect for cinematic titles
+        document.querySelectorAll('.cinematic-title').forEach(title => {
+            const titleRect = title.getBoundingClientRect();
+            if(titleRect.top < window.innerHeight && titleRect.bottom > 0) {
+                const scrolled = (window.innerHeight - titleRect.top) * 0.15;
+                title.style.transform = `translateY(${50 - scrolled}px)`;
+            }
+        });
     });
 
     // Mobile menu toggle
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
     });
     
     // Close mobile menu on link click
     navLinkItems.forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
         });
     });
 
@@ -396,10 +407,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Process command
             if (cmd === 'clear') {
-                const welcome1 = termBody.children[0].outerHTML;
-                const welcome2 = termBody.children[1].outerHTML;
-                termBody.innerHTML = welcome1 + welcome2;
-                termBody.appendChild(this.parentElement);
+                const nodesToRemove = [];
+                for(let i=2; i < termBody.children.length - 1; i++) {
+                    nodesToRemove.push(termBody.children[i]);
+                }
+                nodesToRemove.forEach(node => node.remove());
             } else if (cmd === '') {
                 // Do nothing
             } else {
@@ -418,6 +430,17 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Auto scroll to bottom
             termBody.scrollTop = termBody.scrollHeight;
+        }
+    });
+
+    // Keyboard shortcut for terminal (Backtick `)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '`' || e.key === '~') {
+            e.preventDefault();
+            terminalOverlay.classList.toggle('hidden');
+            if(!terminalOverlay.classList.contains('hidden')) {
+                termInput.focus();
+            }
         }
     });
 
@@ -560,6 +583,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         function animateParticles() {
             requestAnimationFrame(animateParticles);
+            
+            // Optimization: Skip rendering if Hero section is out of viewport
+            if (window.scrollY > window.innerHeight + 100) return;
+            
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             for (let i = 0; i < particlesArray.length; i++) {

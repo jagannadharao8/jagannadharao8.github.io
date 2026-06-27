@@ -24,6 +24,12 @@
     box-sizing: border-box;
     cursor: none; /* Custom cursor replaces default */
 }
+.carousel-container, .carousel-container * {
+    cursor: grab !important;
+}
+.carousel-container:active, .carousel-container:active * {
+    cursor: grabbing !important;
+}
 
 @media (prefers-reduced-motion: reduce) {
     * {
@@ -131,6 +137,38 @@ ul {
     background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
     z-index: 2000;
     box-shadow: 0 0 10px var(--accent-primary);
+}
+
+/* Gradient Mesh Blobs */
+.gradient-mesh {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+.blob {
+    position: absolute;
+    filter: blur(80px);
+    border-radius: 50%;
+    animation: floatBlob 20s infinite alternate ease-in-out;
+}
+.blob-1 {
+    top: -10%; left: -10%;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(176, 0, 255, 0.15) 0%, transparent 70%);
+}
+.blob-2 {
+    bottom: -10%; right: -10%;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(0, 255, 153, 0.1) 0%, transparent 70%);
+    animation-delay: -10s;
+}
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.2); }
 }
 
 /* Glass Card Base */
@@ -290,8 +328,11 @@ ul {
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 .nav-link:hover, .nav-link.active { color: var(--accent-primary); }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; }
-.hamburger span { width: 25px; height: 3px; background: var(--text-primary); transition: var(--transition); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
+.hamburger span { width: 25px; height: 3px; background: var(--text-primary); transition: var(--transition); border-radius: 3px; }
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* ==========================================================================
    HERO SECTION
@@ -475,11 +516,16 @@ ul {
     position: absolute;
     top: 20px; left: 50%;
     width: 16px; height: 16px;
-    background: var(--accent-primary);
+    background: var(--glass-bg);
+    border: 2px solid var(--accent-primary);
     border-radius: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 0 15px var(--accent-primary);
     z-index: 2;
+    transition: var(--transition);
+}
+.timeline-item.visible .timeline-dot {
+    background: var(--accent-primary);
+    box-shadow: 0 0 15px var(--accent-primary);
 }
 .timeline-content { width: 45%; }
 .timeline-content h3 { font-size: 1.4rem; color: var(--accent-secondary); margin-bottom: 0.3rem; }
@@ -556,6 +602,32 @@ ul {
     transform: translateY(-5px);
 }
 .txt-icon { font-size: 1.2rem; font-weight: 800; font-family: var(--font-mono); }
+
+/* Tooltip */
+.tooltip { position: relative; }
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%; left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--bg-color);
+    border: 1px solid var(--accent-primary);
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.2);
+}
+.tooltip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
 
 /* ==========================================================================
    CERTIFICATIONS (CAROUSEL)
