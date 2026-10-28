@@ -1,3 +1,4 @@
+// Final validation after the tested runtime SDK and refreshed portfolio were published.
 const {chromium}=require('playwright');
 const fs=require('node:fs');
 const assert=require('node:assert/strict');
