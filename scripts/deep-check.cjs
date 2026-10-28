@@ -8,6 +8,8 @@ const browser=await chromium.launch();
 const page=await browser.newPage({acceptDownloads:true});
 try{
  await page.goto('https://jagannadharao-ai-research-agent.streamlit.app',{waitUntil:'domcontentloaded'});
+ const wake=page.getByRole('button',{name:'Yes, get this app back up!'});
+ if(await wake.isVisible().catch(()=>false))await wake.click();
  let app;
  for(let n=0;n<24&&!app;n++){
   for(const frame of page.frames())if(await frame.getByRole('heading',{name:'🧠 AI Research Assistant',exact:true}).isVisible().catch(()=>false))app=frame;
@@ -66,7 +68,10 @@ try{
  assert(web.includes('Mode: Web'),'Explicit search did not use web retrieval');
  assert(/\[\d+\]/.test(web),'Web answer has no citation');
  results.web='Web retrieval, answer and citation rendered';
-}catch(e){results.researchError=e.message;process.exitCode=1;}
+}catch(e){results.researchError=e.message;
+ results.researchFrames=[];
+ for(const frame of page.frames()) results.researchFrames.push({url:frame.url(),text:(await frame.locator('body').innerText().catch(()=>'' )).slice(-1800)});
+ process.exitCode=1;}
 try{
  const base='https://jagannadharao8-fake-news-detection.hf.space';
  const checks=[
