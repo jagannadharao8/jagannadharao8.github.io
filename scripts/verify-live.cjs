@@ -1,3 +1,4 @@
+// Recheck after the research-agent hosting follow-up was merged.
 const { chromium } = require('playwright');
 const fs = require('node:fs');
 (async () => {
