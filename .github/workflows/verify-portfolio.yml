@@ -8,6 +8,7 @@ on:
       - index.html
       - resume.html
       - js/**
+      - css/**
 permissions:
   contents: write
 jobs:
