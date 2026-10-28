@@ -52,10 +52,23 @@ try{
  await app.getByRole('heading',{name:'Download the last completed report'}).waitFor({state:'hidden'});
  assert.equal(await app.locator('[data-testid="stChatMessage"]').count(),0);
  results.clearSession='Chat and report cleared';
+ await app.getByRole('button',{name:'Clear this session',exact:true}).click();
+ await app.getByRole('heading',{name:'Download the last completed report'}).waitFor({state:'hidden'});
+ await app.locator('input[type=file]').setInputFiles([]);
+ const web=await ask('Search the web for the official Python tutorial on list comprehensions. Explain the syntax briefly and cite your retrieved sources.');
+ assert(web.includes('Mode: Web'),'Explicit search did not use web retrieval');
+ assert(/\[\d+\]/.test(web),'Web answer has no citation');
+ results.web='Web retrieval, answer and citation rendered';
+ await app.getByRole('button',{name:'Clear this session',exact:true}).click();
+ await app.getByRole('heading',{name:'Download the last completed report'}).waitFor({state:'hidden'});
  const query='What is the calibration code stated in the uploaded document? Answer with the code and its citation.';
  for(const [file,code,other] of [['doc-a.docx','AMBER7319','COBALT8426'],['doc-b.docx','COBALT8426','AMBER7319']]){
    const upload=app.locator('input[type=file]');
    await upload.setInputFiles('fixtures/'+file);
+   await app.getByText(file,{exact:true}).waitFor();
+   // Wait for the uploader-triggered Streamlit rerun before sending chat input.
+   await page.waitForTimeout(3000);
+   await app.locator('[data-testid="stStatusWidget"]').waitFor({state:'hidden',timeout:60000});
    await app.getByRole('textbox',{name:'Ask a question'}).waitFor();
    const answer=await ask(query,code);
    assert(answer.includes('Mode: Document'));
@@ -66,13 +79,7 @@ try{
    assert(/\[\d+\]/.test(primary),'Document answer has no citation');
    results[file]='Current-document code and citation verified';
  }
- await app.getByRole('button',{name:'Clear this session',exact:true}).click();
- await app.getByRole('heading',{name:'Download the last completed report'}).waitFor({state:'hidden'});
- await app.locator('input[type=file]').setInputFiles([]);
- const web=await ask('Search the web for the official Python tutorial on list comprehensions. Explain the syntax briefly and cite your retrieved sources.');
- assert(web.includes('Mode: Web'),'Explicit search did not use web retrieval');
- assert(/\[\d+\]/.test(web),'Web answer has no citation');
- results.web='Web retrieval, answer and citation rendered';
+
 }catch(e){results.researchError=e.message;
  results.researchFrames=[];
  for(const frame of page.frames()) results.researchFrames.push({url:frame.url(),text:(await frame.locator('body').innerText().catch(()=>'' )).slice(-1800)});
