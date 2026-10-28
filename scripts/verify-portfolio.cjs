@@ -1,0 +1,31 @@
+const { chromium } = require('playwright');
+const fs = require('node:fs');
+(async () => {
+  fs.mkdirSync('.qa/output', { recursive: true });
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 1365, height: 900 }, reducedMotion: 'reduce' });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('http://127.0.0.1:8000', { waitUntil: 'networkidle' });
+  await page.screenshot({ path: '.qa/output/desktop.png', fullPage: true });
+  if (!(await page.getByRole('heading', { name: 'Jalla Jagannadharao', exact: true }).isVisible())) throw Error('Missing identity heading');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload({ waitUntil: 'networkidle' });
+  const menu = page.getByRole('button', { name: 'Toggle navigation' });
+  await menu.click();
+  if ((await menu.getAttribute('aria-expanded')) !== 'true') throw Error('Menu did not expand');
+  await page.locator('#nav-links').getByRole('link', { name: 'Projects', exact: true }).click();
+  if ((await menu.getAttribute('aria-expanded')) !== 'false') throw Error('Menu did not close');
+  if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2)) {
+    console.log(await page.evaluate(() => ({width:innerWidth, scroll:document.documentElement.scrollWidth, offenders:[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+2).map(e=>({tag:e.tagName, cls:e.className, right:e.getBoundingClientRect().right})).slice(0,30)})));
+    throw Error('Mobile horizontal overflow');
+  }
+  await page.screenshot({ path: '.qa/output/mobile.png', fullPage: true });
+  await page.goto('http://127.0.0.1:8000/resume.html', { waitUntil: 'networkidle' });
+  await page.emulateMedia({ media: 'print' });
+  await page.pdf({ path: 'resume.pdf', format: 'A4', printBackground: true, preferCSSPageSize: true });
+  await page.screenshot({ path: '.qa/output/resume.png', fullPage: true });
+  if (errors.length) throw Error(errors.join('\n'));
+  fs.writeFileSync('.qa/output/checks.json', JSON.stringify({desktop: true, mobileMenu: true, mobileOverflow: false, javascriptErrors: errors}, null, 2));
+  await browser.close();
+})().catch(e => { console.error(e); process.exit(1); });
