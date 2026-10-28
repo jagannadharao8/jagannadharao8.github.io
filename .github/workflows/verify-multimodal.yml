@@ -1,0 +1,47 @@
+name: Verify deployed multimodal inputs
+on:
+  push:
+    branches: [fix/portfolio-reliability-20261028]
+    paths: [.github/workflows/verify-multimodal.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests reportlab
+      - run: |
+          python - <<'PY'
+          import base64,io,json,requests
+          from reportlab.pdfgen import canvas
+          base="https://jagannadharao8-fake-news-detection.hf.space/api/analyze"
+          png=base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jWZkAAAAASUVORK5CYII=")
+          document=io.BytesIO()
+          page=canvas.Canvas(document)
+          page.drawString(50,750,"Synthetic private test: QZ7319 made 4321 purple tokens. No public evidence exists.")
+          page.save()
+          results=[]
+          for label,files,data in [
+              ("valid_pdf",{"image":("test.pdf",document.getvalue(),"application/pdf")},{}),
+              ("image_only",{"image":("blank.png",png,"image/png")},{}),
+              ("text_and_image",{"image":("blank.png",png,"image/png")},{"text":"Synthetic private test QZ7319 made 4321 purple tokens. No public evidence exists."})
+          ]:
+              response=requests.post(base,files=files,data=data,timeout=150)
+              row={"input":label,"status":response.status_code}
+              if response.status_code==200:
+                  value=response.json()
+                  row.update(verdict=value.get("verdict"),cardVerdict=value.get("card",{}).get("final_label"),
+                      visionAvailable=value.get("vision",{}).get("available"),
+                      visionLabel=value.get("vision",{}).get("label"),
+                      visionErrorPresent=bool(value.get("vision",{}).get("error")))
+                  assert row["verdict"]==row["cardVerdict"]
+                  assert row["verdict"]=="Uncertain"
+              results.append(row)
+              print(json.dumps(row))
+              assert response.status_code==200, label
+          print("All three deployed input paths completed with consistent uncertainty.")
+          PY
