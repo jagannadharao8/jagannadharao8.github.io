@@ -1,3 +1,4 @@
+// Verify the default lexical retrieval after its dependency manifest redeployment.
 // Final validation after the tested runtime SDK and refreshed portfolio were published.
 const {chromium}=require('playwright');
 const fs=require('node:fs');
@@ -12,7 +13,9 @@ try{
  const wake=page.getByRole('button',{name:'Yes, get this app back up!'});
  if(await wake.isVisible().catch(()=>false))await wake.click();
  let app;
- for(let n=0;n<24&&!app;n++){
+ for(let n=0;n<48&&!app;n++){
+  const wakeAgain=page.getByRole('button',{name:'Yes, get this app back up!'});
+  if(await wakeAgain.isVisible().catch(()=>false))await wakeAgain.click();
   for(const frame of page.frames())if(await frame.getByRole('heading',{name:'🧠 AI Research Assistant',exact:true}).isVisible().catch(()=>false))app=frame;
   if(!app)await page.waitForTimeout(5000);
  }
@@ -56,6 +59,7 @@ try{
    await app.getByRole('textbox',{name:'Ask a question'}).waitFor();
    const answer=await ask(query,code);
    assert(answer.includes('Mode: Document'));
+   assert(answer.includes('TF-IDF lexical'),'Updated lightweight retrieval was not active');
    // Previous chat can appear in the prompt, but the answer must follow the current document.
    const primary=answer.split('Mode:')[0];
    assert(!primary.includes(other),'Answer reused a fact from the other document');
