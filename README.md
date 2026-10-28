@@ -4,8 +4,8 @@ Static portfolio and one-page résumé for a 2026 CSE (AI & ML) graduate, open t
 [Live portfolio](https://jagannadharao8.github.io) · [PDF résumé](https://jagannadharao8.github.io/resume.pdf) · [Editable résumé](resume.html).
 
 ## Project evidence
-- Research assistant: document/web retrieval, session-private caching, citation review and report downloads. The source suite passed 23 tests, and a real-provider check completed three application queries. Hosted behavior must be checked after deployment.
-- Misinformation evidence assistant: the deployed text path and evidence card return matching uncertainty; malformed/empty/URL inputs are rejected and shared history is disabled. Full multimodal validation remains a limitation.
+- Research assistant: TF-IDF document/web retrieval, optional FAISS semantic retrieval, session-private caching, citation review and report downloads. The source suite passed 26 tests, and a real-provider check completed three application queries. Hosted behavior must be checked after deployment.
+- Misinformation evidence assistant: the deployed text path and evidence card return matching uncertainty; malformed/empty/URL inputs are rejected and shared history is disabled. Image requests safely abstain while the configured cloud vision provider is unavailable; accepting an image is not a verified image assessment.
 - Income classification: the matching model and held-out evaluation artifacts are committed. ROC-AUC 0.9207 and accuracy 85.29% on 9,758 held-out census rows apply to that dataset split.
 
 ## Maintain and verify
