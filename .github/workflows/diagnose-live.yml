@@ -1,0 +1,21 @@
+name: Diagnose live hosting
+on:
+  push:
+    branches: [fix/portfolio-reliability-20261028]
+    paths: [scripts/diagnose-live.cjs, .github/workflows/diagnose-live.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --prefix .qa playwright
+      - run: .qa/node_modules/.bin/playwright install --with-deps chromium
+      - env:
+          NODE_PATH: ${{ github.workspace }}/.qa/node_modules
+        run: node scripts/diagnose-live.cjs
