@@ -1,0 +1,29 @@
+name: Verify published portfolio and demos
+on:
+  push:
+    branches: [fix/portfolio-reliability-20261028]
+    paths:
+      - .github/workflows/verify-live.yml
+      - scripts/verify-live.cjs
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --prefix .qa playwright
+      - run: .qa/node_modules/.bin/playwright install --with-deps chromium
+      - env:
+          NODE_PATH: ${{ github.workspace }}/.qa/node_modules
+        run: node scripts/verify-live.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-verification
+          path: live-results/
+          retention-days: 7
