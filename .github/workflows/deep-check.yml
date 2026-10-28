@@ -1,3 +1,4 @@
+# Final check after numeric citation normalization and current résumé publication.
 name: Deep deployed application checks
 on:
   push:
@@ -45,6 +46,7 @@ jobs:
               if path.name=='resume.pdf':
                   assert len(PdfReader(path).pages)==1
                   assert 'JALLA' in text.upper() and 'SKILLRACK' in text.upper()
+                  assert '0.9207' in text and '85.29%' in text
               print(path.name+': selectable text verified')
           for path in folder.glob('*.docx'):
               assert any(p.text.strip() for p in Document(path).paragraphs)
