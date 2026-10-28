@@ -1,0 +1,58 @@
+name: Deep deployed application checks
+on:
+  push:
+    branches: [fix/portfolio-reliability-20261028]
+    paths: [scripts/deep-check.cjs, .github/workflows/deep-check.yml]
+permissions:
+  contents: read
+jobs:
+  deep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: npm install --prefix .qa playwright
+      - run: .qa/node_modules/.bin/playwright install --with-deps chromium
+      - run: |
+          pip install python-docx pypdf
+          mkdir -p fixtures
+          python - <<'PY'
+          from docx import Document
+          for name,code in [('a','AMBER7319'),('b','COBALT8426')]:
+              doc=Document()
+              doc.add_paragraph('Calibration record. The calibration code is '+code+'. This is synthetic test data.')
+              doc.save('fixtures/doc-'+name+'.docx')
+          PY
+      - env:
+          NODE_PATH: ${{ github.workspace }}/.qa/node_modules
+        run: node scripts/deep-check.cjs
+      - if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          from docx import Document
+          folder=Path('deep-results')
+          for path in folder.glob('*.pdf'):
+              text=' '.join(page.extract_text() or '' for page in PdfReader(path).pages)
+              assert text.strip(), path
+              if path.name=='resume.pdf':
+                  assert len(PdfReader(path).pages)==1
+                  assert 'JALLA' in text.upper() and 'SKILLRACK' in text.upper()
+              print(path.name+': selectable text verified')
+          for path in folder.glob('*.docx'):
+              assert any(p.text.strip() for p in Document(path).paragraphs)
+              print(path.name+': document text verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deep-live-verification
+          path: deep-results/
+          retention-days: 7
