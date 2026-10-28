@@ -43,6 +43,10 @@ const fs = require('node:fs');
     }
   } catch (error) {
     results.research = 'Live check incomplete: ' + error.message.slice(0,200);
+    for (const frame of page.frames()) {
+      const alerts = await frame.locator('[data-testid="stException"], [data-testid="stAlert"]').allTextContents().catch(()=>[]);
+      if(alerts.length) console.log(JSON.stringify({researchAlerts: alerts}));
+    }
   }
   try {
     const health = await fetch('https://jagannadharao8-fake-news-detection.hf.space/health', {signal:AbortSignal.timeout(90000)});
