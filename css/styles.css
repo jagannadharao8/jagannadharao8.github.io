@@ -823,3 +823,20 @@ footer { padding: 2rem 10%; position: relative; }
     .custom-cursor, .cursor-trail { display: none; }
     * { cursor: auto; }
 }
+
+/* Fit content to narrow screens and keep closed navigation out of focus order. */
+.hamburger { background: transparent; border: 0; padding: 0; }
+:focus-visible { outline: 2px solid var(--accent-secondary); outline-offset: 4px; }
+@media (max-width: 768px) {
+    .nav-links { right: 0; visibility: hidden; opacity: 0; pointer-events: none; }
+    .nav-links.active { visibility: visible; opacity: 1; pointer-events: auto; }
+    .projects-grid { grid-template-columns: minmax(0, 1fr); }
+    .bento-container { grid-template-columns: minmax(0, 1fr); }
+    .bento-container > * { grid-column: auto; min-width: 0; }
+    .main-title { font-size: clamp(2rem, 9vw, 3rem); overflow-wrap: anywhere; }
+    .project-card { padding: 1.5rem; min-width: 0; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .timeline-content { width: calc(100% - 45px); min-width: 0; }
+    .timeline-dot { left: 10px; }
+    .footer-content { flex-wrap: wrap; gap: 1rem; }
+}

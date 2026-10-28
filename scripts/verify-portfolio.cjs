@@ -16,7 +16,10 @@ const fs = require('node:fs');
   if ((await menu.getAttribute('aria-expanded')) !== 'true') throw Error('Menu did not expand');
   await page.locator('#nav-links').getByRole('link', { name: 'Projects', exact: true }).click();
   if ((await menu.getAttribute('aria-expanded')) !== 'false') throw Error('Menu did not close');
-  if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2)) throw Error('Mobile horizontal overflow');
+  if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2)) {
+    console.log(await page.evaluate(() => ({width:innerWidth, scroll:document.documentElement.scrollWidth, offenders:[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+2).map(e=>({tag:e.tagName, cls:e.className, right:e.getBoundingClientRect().right})).slice(0,30)})));
+    throw Error('Mobile horizontal overflow');
+  }
   await page.screenshot({ path: '.qa/output/mobile.png', fullPage: true });
   await page.goto('http://127.0.0.1:8000/resume.html', { waitUntil: 'networkidle' });
   await page.emulateMedia({ media: 'print' });
