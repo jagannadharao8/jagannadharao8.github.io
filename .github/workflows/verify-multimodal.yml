@@ -1,3 +1,4 @@
+# Recheck after explicit Gemini credential/model configuration was deployed.
 name: Verify deployed multimodal inputs
 on:
   push:
