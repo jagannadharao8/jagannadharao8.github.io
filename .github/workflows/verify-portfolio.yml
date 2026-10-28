@@ -1,7 +1,7 @@
 name: Verify portfolio and render resume
 on:
   push:
-    branches: [fix/portfolio-reliability-20261028]
+    branches: [fix/portfolio-verified-results-20261028]
     paths:
       - .github/workflows/verify-portfolio.yml
       - scripts/verify-portfolio.cjs
@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: fix/portfolio-reliability-20261028
+          ref: fix/portfolio-verified-results-20261028
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -60,5 +60,5 @@ jobs:
           git add resume.pdf
           if ! git diff --cached --quiet; then
             git commit -m "Regenerate verified one-page resume PDF"
-            git push origin HEAD:fix/portfolio-reliability-20261028
+            git push origin HEAD:fix/portfolio-verified-results-20261028
           fi
