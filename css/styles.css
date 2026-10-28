@@ -840,3 +840,12 @@ footer { padding: 2rem 10%; position: relative; }
     .timeline-dot { left: 10px; }
     .footer-content { flex-wrap: wrap; gap: 1rem; }
 }
+
+html { overflow-x: clip; }
+@media (max-width: 768px) {
+    .stats-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat-box { min-width: 0; padding: 1rem; overflow-wrap: anywhere; }
+    .stat-box h3, .stat-box span { font-size: 2.2rem; }
+    .stat-box p { font-size: .75rem; }
+    .spotlight { display: none; }
+}
