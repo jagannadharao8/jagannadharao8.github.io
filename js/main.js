@@ -6,24 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
     const progressBar = document.getElementById('loader-progress');
     
-    // Simulate loading
-    let progress = 0;
-    const loadInterval = setInterval(() => {
-        progress += Math.random() * 15;
-        if (progress > 100) progress = 100;
-        progressBar.style.width = `${progress}%`;
-        
-        if (progress === 100) {
-            clearInterval(loadInterval);
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                    initAnimations(); // Trigger initial scroll reveals
-                }, 500);
-            }, 500);
-        }
-    }, 150);
+    // Reveal content immediately instead of simulating progress.
+    if (preloader) preloader.style.display = "none";
+    initAnimations();
 
     /* ==========================================================================
        CUSTOM CURSOR & MAGNETIC BUTTONS
@@ -174,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
+        hamburger.setAttribute("aria-expanded", String(navLinks.classList.contains("active")));
     });
     
     // Close mobile menu on link click
@@ -181,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             hamburger.classList.remove('active');
+            hamburger.setAttribute("aria-expanded", "false");
         });
     });
 
@@ -240,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeWriterElement = document.getElementById('typewriter-text');
     const titles = [
         "AI & ML Engineer",
-        "Generative AI Specialist",
+        "Python & Applied AI Developer",
         "Deep Learning Enthusiast",
         "Building Intelligent Systems"
     ];
@@ -413,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Print user command
             const cmdDiv = document.createElement('div');
-            cmdDiv.innerHTML = `<span class="prompt">guest@jagannadharao:~$</span> ${cmd}`;
+            cmdDiv.textContent = `guest@jagannadharao:~$ ${cmd}`;
             termBody.insertBefore(cmdDiv, this.parentElement);
             
             // Process command
